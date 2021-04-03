@@ -1,0 +1,39 @@
+{
+  "name": "zz-space-finder",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/barosanuemailtest/zz-space-finder.git"
+  },
+  "devDependencies": {
+    "@aws-cdk/aws-apigateway": "*",
+    "@aws-cdk/aws-cognito": "*",
+    "@aws-cdk/aws-dynamodb": "*",
+    "@aws-cdk/aws-lambda": "*",
+    "@aws-cdk/aws-iam": "*",
+    "@aws-cdk/core": "*",
+    "@types/aws-lambda": "*",
+    "@types/jest": "*",
+    "@types/node": "*",
+    "@types/uuid": "*",
+    "@types/webpack": "*",
+    "aws-cdk": "*",
+    "jest": "*",
+    "ts-jest": "*",
+    "ts-loader": "*",
+    "ts-node": "*",
+    "typescript": "*",
+    "webpack": "*",
+    "webpack-cli": "*"
+  },
+  "dependencies": {
+    "@aws-amplify/auth": "*",
+    "aws-amplify": "*",
+    "aws-sdk": "*",
+    "uuid": "*"
+  }
+}
