@@ -1,9 +1,11 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult, Context } from "aws-lambda";
-import { AbstractApiLambda } from "../AbstractApiLambda";
+import { DynamoDB } from "aws-sdk";
 
 
+class Read {
 
-class Read extends AbstractApiLambda {
+    protected dbClient = new DynamoDB.DocumentClient();
+    TABLE_NAME = process.env.TABLE_NAME;  
 
     public async handleRequest(event: APIGatewayProxyEvent, context: Context): Promise<APIGatewayProxyResult> {
         return {
