@@ -1,18 +1,44 @@
 import { CfnOutput, Construct, Stack, StackProps, App, CfnParameter } from '@aws-cdk/core';
+import { LambdaTable } from './Tables/LambdaTable';
+import { AuthorizationType, LambdaIntegration, MethodOptions, RestApi } from '@aws-cdk/aws-apigateway'
 
 class SpaceStack extends Stack {
 
-    private zzz = new CfnParameter(this, 'param1', {
-        type: "String"
-    })
+    private spacesTable: LambdaTable;
+    private spaceApi = new RestApi(this, 'SpaceApi');
 
     constructor(scope: Construct, id: string, props: StackProps) {
         super(scope, id, props)
-        console.log('given param:');
-        console.log(this.zzz.valueAsString)
-        new CfnOutput(this, 'someId', {
-            value: this.zzz.valueAsString            
+        this.initialize();
+    }
+
+    private initialize(){
+        this.initializeStackParamsAndOutput();
+        this.createSpacesTable();
+        this.addSpacesApiLambdasIntegrations();
+    }
+    private initializeStackParamsAndOutput(){
+        const zzz = new CfnParameter(this, 'param1', {
+            type: "String"
         })
+        new CfnOutput(this, 'someId', {
+            value: zzz.valueAsString
+        })
+    }
+    private createSpacesTable(){
+        this.spacesTable = new LambdaTable(this,
+            {
+                tableName: 'SpacesTable',
+                partitionKeyName: 'spaceId',
+                createLambdaPath: 'createSpace',
+                readLambdaPath: 'readSpace'
+            }
+        )
+    }
+    private addSpacesApiLambdasIntegrations(){
+        const spaceResource = this.spaceApi.root.addResource('spaces');
+        spaceResource.addMethod('GET', this.spacesTable.readLambdaIntegration);
+        spaceResource.addMethod('POST', this.spacesTable.createLambdaIntegration)
     }
 }
 
