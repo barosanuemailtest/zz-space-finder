@@ -1,0 +1,5 @@
+@token = 1234
+
+POST https://hr7o1x1cvj.execute-api.eu-west-1.amazonaws.com/prod/spaces
+
+###

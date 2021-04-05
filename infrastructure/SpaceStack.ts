@@ -1,6 +1,7 @@
 import { CfnOutput, Construct, Stack, StackProps, App, CfnParameter } from '@aws-cdk/core';
 import { LambdaTable } from './Tables/LambdaTable';
 import { AuthorizationType, LambdaIntegration, MethodOptions, RestApi } from '@aws-cdk/aws-apigateway'
+import { LambdasNames } from '../services/LambdasNames';
 
 class SpaceStack extends Stack {
 
@@ -30,8 +31,8 @@ class SpaceStack extends Stack {
             {
                 tableName: 'SpacesTable',
                 partitionKeyName: 'spaceId',
-                createLambdaPath: 'createSpace',
-                readLambdaPath: 'readSpace'
+                createLambdaPath: LambdasNames.CREATE_SPACE,
+                readLambdaPath: LambdasNames.READ_SPACE
             }
         )
     }
